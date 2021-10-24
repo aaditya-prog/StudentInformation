@@ -216,7 +216,7 @@ namespace StudentInformation
             this.openToolStripMenuItem1});
             this.fileToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(43, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(43, 23);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem1
@@ -234,14 +234,14 @@ namespace StudentInformation
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 27);
             this.menuStrip1.TabIndex = 13;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(389, 86);
+            this.pictureBox1.Location = new System.Drawing.Point(372, 86);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(356, 419);
             this.pictureBox1.TabIndex = 15;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,19 +20,33 @@ namespace StudentInformation
 
     private void btn_submit_Click(object sender, EventArgs e)
         {
-            string student_name = txt_name.Text;
-            string student_id = txt_id.Text;
-            string faculty = combo_faculty.Text;
-            string group = combo_group.Text;
-            string is_active = check_is_active.Text;
+            try
+            {
+                string student_name = txt_name.Text;
+                string student_id = txt_id.Text;
+                string faculty = combo_faculty.Text;
+                string group = combo_group.Text;
+                string is_active = check_is_active.Text;
 
-            Student s = new Student();
+                Student s = new Student();
 
-            s.StudentName = student_name;
-            s.StudentId = int.Parse(student_id);
-            s.Faculty = faculty;
-            s.Group = group;
-            s.IsActive = bool.Parse(is_active);
+                s.StudentName = student_name;
+                s.StudentId = int.Parse(student_id);
+                s.Faculty = faculty;
+                s.Group = group;
+                s.IsActive = bool.Parse(is_active);
+
+                string data = JsonConvert.SerializeObject(s);
+                Utility.WriteToText(data);
+                
+                
+            }
+
+            catch(Exception ex)
+            { 
+                Console.WriteLine(ex);
+            
+            }
     
         }
 
