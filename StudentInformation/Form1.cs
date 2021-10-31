@@ -16,9 +16,10 @@ namespace StudentInformation
         public Form1()
         {
             InitializeComponent();
+            List();
         }
 
-    private void btn_submit_Click(object sender, EventArgs e)
+        private void btn_submit_Click(object sender, EventArgs e)
         {
             try
             {
@@ -39,11 +40,19 @@ namespace StudentInformation
                 s.Group = group;
                 s.IsActive = bool.Parse(is_active);
 
-                //converting data into JSON format
-                string data = JsonConvert.SerializeObject(s);
-                //using the function from 'Utility' class to write in the JSON
-                //formatted data in the file
+                string json = Utility.ReadFromFile();
+                List<Student> lst = new List<Student>();
+                if (json != null && json != "")
+                {
+
+                    lst = JsonConvert.DeserializeObject<List<Student>>(json);
+
+                }
+                lst.Add(s);
+
+                string data = JsonConvert.SerializeObject(lst);
                 Utility.WriteToText(data);
+                List();
 
                 //clearing the input fields after the data is written in the file
                 txt_name.Clear();
@@ -57,12 +66,12 @@ namespace StudentInformation
 
             }
 
-            catch(Exception ex)
-            { 
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex);
-            
+
             }
-    
+
         }
 
         private void btn_clear_Click(object sender, EventArgs e)
@@ -85,10 +94,21 @@ namespace StudentInformation
         //    }
         //}
 
+        public void List()
+
+        {
+            string json = Utility.ReadFromFile();
+            if (json != null && json != "")
+            {
+                List<Student> lst = JsonConvert.DeserializeObject<List<Student>>(json);
+                dataGridView1.DataSource = lst;
+            }
+
+        }
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Utility.ReadFromText();
-       
+            List();
+
         }
 
         private void label1_Click(object sender, EventArgs e)

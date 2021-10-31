@@ -11,7 +11,7 @@ namespace StudentInformation
     public static class Utility
     {
         private static string _filePath = "student.txt";
-       
+
 
         public static string WriteToText(string data)
         {
@@ -28,31 +28,24 @@ namespace StudentInformation
 
         }
 
-        public static string ReadFromText()
+
+        public static string ReadFromFile()
         {
 
-            if (!File.Exists(_filePath))
+            if (File.Exists(_filePath))
             {
 
-                using (StreamReader file = File.OpenText(_filePath))
-                {
-                    var student = JsonConvert.DeserializeObject<Student>(File.ReadAllText(_filePath));
+                return File.ReadAllText(_filePath);
 
-                    JsonSerializer serializer = new JsonSerializer();
-                    Student student1 = (Student)serializer.Deserialize(file, typeof(Student));
-                    System.Diagnostics.Debug.Print(student.StudentName);
-
-                }
             }
 
             else
             {
-
-                Console.WriteLine("File does not exist");
+                return null;
             }
 
-                return "Success";
-            }
 
         }
+
     }
+}
