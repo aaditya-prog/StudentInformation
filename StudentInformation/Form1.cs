@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace StudentInformation
 {
@@ -17,6 +18,7 @@ namespace StudentInformation
         {
             InitializeComponent();
             List();
+            loadChart();
         }
 
         private void btn_submit_Click(object sender, EventArgs e)
@@ -53,6 +55,7 @@ namespace StudentInformation
                 string data = JsonConvert.SerializeObject(lst);
                 Utility.WriteToText(data);
                 List();
+                loadChart();
 
                 //clearing the input fields after the data is written in the file
                 txt_name.Clear();
@@ -105,6 +108,38 @@ namespace StudentInformation
             }
 
         }
+
+        private void loadChart()
+        {
+            string data = Utility.ReadFromFile();
+
+            List<Student> lstStudent = JsonConvert.DeserializeObject<List<Student>>(data);
+
+            var groupedData = lstStudent.GroupBy(n => n.Faculty)
+                .Select(n => new
+                {
+                    FacultyName = n.Key,
+                    Count = n.Count()
+                }).OrderBy(n => n.FacultyName);
+
+            chartStudent.Series[0].LegendText = "Faculty Graph";
+            chartStudent.Series[0].ChartType = SeriesChartType.Bar;
+            chartStudent.Series[0].IsValueShownAsLabel = true;
+
+            chartStudent.Series[0].XValueMember = "FacultyName";
+            chartStudent.Series[0].YValueMembers = "Count";
+
+            chartStudent.DataSource = groupedData;
+
+
+
+
+
+
+
+
+
+        }
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             List();
@@ -132,6 +167,16 @@ namespace StudentInformation
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }
